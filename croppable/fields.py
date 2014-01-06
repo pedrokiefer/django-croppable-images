@@ -30,17 +30,17 @@ class CroppableImageFieldFile(ImageFieldFile):
             compound_name = IMAGE_FIELD_DELIMITER.join([stashed_filepath, coords_csv])
 
             # get imagekit spec field names --> spec files
-            spec_dict = dict(zip(self.instance._ik.spec_fields, self.instance._ik.spec_files))
+            # spec_dict = dict(zip(self.instance._ik.spec_fields, self.instance._ik.spec_files))
 
             # invalidate imagekit spec files
             if self.field.invalidate_on_save:
                 self.name = self.filename if hasattr(self, 'filename') else stashed_filepath
                 self.coords_csv = self.coords_csv if hasattr(self, 'coords_csv') else coords_csv
-                for spec_name in self.field.invalidate_on_save:
-                    if spec_name in spec_dict:
-                        spec = spec_dict.get(spec_name)
-                        spec.delete()
-                        spec.invalidate()
+                #for spec_name in self.field.invalidate_on_save:
+                #    if spec_name in spec_dict:
+                #        spec = spec_dict.get(spec_name)
+                #        spec.delete()
+                #        spec.invalidate()
         
         else:
             # call the super's save() which will save to storage with the proper filename
